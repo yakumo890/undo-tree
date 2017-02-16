@@ -1086,6 +1086,10 @@ in visualizer."
 (defconst undo-tree-visualizer-buffer-name " *undo-tree*")
 (defconst undo-tree-diff-buffer-name "*undo-tree Diff*")
 
+;; visualizer size
+(defcustom undo-tree-visualizer-ratio (/ 1 4.0)
+  "ratio of current window and undo-tree-visualizer window")
+
 ;; install history-auto-save hooks
 (add-hook 'write-file-functions 'undo-tree-save-history-hook)
 (add-hook 'find-file-hook 'undo-tree-load-history-hook)
@@ -3203,8 +3207,9 @@ signaling an error if file is not found."
   ;; prepare *undo-tree* buffer, then draw tree in it
   (let ((undo-tree buffer-undo-tree)
         (buff (current-buffer))
-	(display-buffer-mark-dedicated 'soft))
-    (switch-to-buffer-other-window
+		(display-buffer-mark-dedicated 'soft))
+	(split-window (selected-window) (round (* (window-width) undo-tree-visualizer-ratio)) 'left)
+    (switch-to-buffer
      (get-buffer-create undo-tree-visualizer-buffer-name))
     (setq undo-tree-visualizer-parent-buffer buff)
     (setq undo-tree-visualizer-parent-mtime
@@ -3948,15 +3953,7 @@ using `undo-tree-redo' or `undo-tree-visualizer-redo'."
 	(remove-hook 'before-change-functions 'undo-tree-kill-visualizer t))
     ;; kill diff buffer, if any
     (when undo-tree-visualizer-diff (undo-tree-visualizer-hide-diff))
-    (let ((parent undo-tree-visualizer-parent-buffer)
-	  window)
-      ;; kill visualizer buffer
-      (kill-buffer nil)
-      ;; switch back to parent buffer
-      (unwind-protect
-	  (if (setq window (get-buffer-window parent))
-	      (select-window window)
-	    (switch-to-buffer parent))))))
+	(delete-window)))
 
 
 (defun undo-tree-visualizer-abort ()
