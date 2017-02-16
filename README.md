@@ -1,17 +1,17 @@
-# undo-tree$B$N?6$kIq$$JQ99(B
+# undo-treeの振る舞い変更
 
-## $BJQ99E@(B
+## 変更点
 
-* undo-tree-visualizer$B$r?75,%&%#%s%I%&$G:n@.(B
-* $B8=:_$N%&%#%s%I%&$N:8B&$K:n@.(B
-* undo-tree$B=*N;;~$K%&%#%s%I%&$r>C5n$9$k(B
-* $B%&%#%s%I%&%5%$%:$O8=:_$N%&%#%s%I%&%5%$%:$N(B1/4
-  * undo-tree-visualizer-ratio$B$NCM$G%&%#%s%I%&%5%$%:$rJQ992DG=(B
-  * undo-tree-visualizer-ratio$B$OHf$N7A$GI=$9(B
+* undo-tree-visualizerを新規ウィンドウで作成
+* 現在のウィンドウの左側に作成
+* undo-tree終了時にウィンドウを消去する
+* ウィンドウサイズは現在のウィンドウサイズの1/4
+  * undo-tree-visualizer-ratioの値でウィンドウサイズを変更可能
+  * undo-tree-visualizer-ratioは比の形で表す
   
 ## TODO
 
-* $B%&%#%s%I%&$r:n@.$9$k0LCV$rJQ992DG=$K$9$k(B
+* ウィンドウを作成する位置を変更可能にする
 
 ## License
 GNU General Public License, Version 3.0
